@@ -1,165 +1,263 @@
-import { useState } from "react";
-import "remixicon/fonts/remixicon.css";
+import { useState } from 'react'
+import 'remixicon/fonts/remixicon.css'
 import './App.css'
-const App = () => {
-  const [right, setRight] = useState(-450);
-  const handleDrawer = () => {
-    setRight(0);
-  };
-  const closeDrawer = () => {
-    setRight(-450);
-  };
+
+const App = ()=>{
+  const [right, setRight] = useState(-450)
+  const [students, setStudents] = useState([])
+  const [form, setForm] = useState({
+    fullname: '',
+    class: '',
+    roll: '',
+    subject: '',
+    dob: ''
+  })
+
+  const handleDrawer = ()=>{
+    setRight(0)
+  }
+
+  const handleInput = (e)=>{
+    const input = e.target
+    const value = input.value
+    const key = input.name
+    setForm({
+      ...form,
+      [key]: value
+    })
+  }
+
+  const createStudent = (e)=>{
+    e.preventDefault()
+    setStudents([
+      ...students,
+      form
+    ])
+    setForm({
+      fullname: '',
+      class: '',
+      roll: '',
+      subject: '',
+      dob: ''
+    })
+    setRight(-450)
+  }
+
+  const deleteStudent = (index)=>{
+    const backup = [...students]
+    backup.splice(index, 1)
+    setStudents(backup)
+  }
+
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "grey" }}>
-      <div
-        style={{
-          width: "60%",
-          backgroundColor: "white",
-          padding: "32",
-          margin: " 32px auto",
-        }}
-      >
-        <h1 style={{ padding: 0, margin: 0, textAlign: "center" }}>
-          Coding Platform
-        </h1>
-        <button
+    <div style={{
+      background: '#ddd',
+      minHeight: '100vh'
+    }}>
+      <div style={{
+        width: '70%',
+        background: 'white',
+        margin: '32px auto',
+        padding: 32
+      }}>
+        <h1 style={{
+          padding: 0,
+          margin: 0,
+          textAlign: 'center'
+        }}>CodingOtt</h1>
+
+        <button 
           onClick={handleDrawer}
           style={{
-            margin:'15px 0',
-            border: "none",
-            background: "rgb(238,174,202)",
-            background:
-              "radial-gradient(circle, rgba(238,174,202,1) 62%, rgba(148,187,233,1) 100%)",
-            padding: "10px",
-            borderRadius: "10px",
-            width: "120px",
+            border: 'none',
+            background: '#8407ba',
+            color: 'white',
+            padding: '14px 24px',
+            borderRadius: 4,
+            fontSize: 16,
+            margin: '24px 0'
           }}
         >
-          <i className="ri-user-add-fill"></i>
+          <i className="ri-user-add-line" style={{marginRight: 8}}></i>
           New Student
         </button>
-        <table className="crud-app">
+
+        <table className='crud-app'>
           <thead>
-            <th>S/no</th>
-            <th>Student's Name</th>
-            <th>Subject</th>
-            <th>Class</th>
-            <th>Roll No.</th>
-            <th>Dob</th>
-            <th>Action</th>
-          </thead>
-          <tbody>
             <tr>
-            <td>1</td>
-            <td>Sourav Joshi</td>
-            <td>Mathematics</td>
-            <td>10</td>
-            <td>1</td>
-            <td>12.02.2009</td>
-            <td>
-              <div >
-                <button style={{color:'green',background:'white',cursor:'pointer',border:'none'}}>
-                <i className="ri-edit-line"></i>
-                </button>
-                <button style={{marginLeft:10,color:'red',background:'white',cursor:'pointer',border:'none'}} >
-                <i className="ri-delete-bin-6-fill"></i>
-                </button>
-              
-              </div>
-            </td>
+              <th>S/No</th>
+              <th>Student`s name</th>
+              <th>Subject</th>
+              <th>Class</th>
+              <th>Roll</th>
+              <th>DOB</th>
+              <th>Action</th>
             </tr>
-           
+          </thead>
+
+          <tbody>
+            {
+              students.map((item, index)=>(
+                <tr>
+                  <td>{index+1}</td>
+                  <td>{item.fullname}</td>
+                  <td>{item.subject}</td>
+                  <td>{item.class}</td>
+                  <td>{item.roll}</td>
+                  <td>{item.dob}</td>
+                  <td>
+                    <div>
+                      <button style={{
+                        border: 'none',
+                        width: 32,
+                        height: 32,
+                        background: '#07c65d',
+                        color: 'white',
+                        borderRadius: 4,
+                        marginRight: 12
+                      }}>
+                        <i className="ri-image-edit-line"></i>
+                      </button>
+
+                      <button 
+                        onClick={()=>deleteStudent(index)}
+                        style={{
+                          border: 'none',
+                          width: 32,
+                          height: 32,
+                          background: 'red',
+                          color: 'white',
+                          borderRadius: 4
+                        }}
+                      >
+                        <i className="ri-delete-bin-6-line"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
-      <aside
-        style={{
-          position: "fixed",
-          top: 0,
-          right: right,
-          width: 350,
-          background: "white",
-          height: "100%",
-          boxShadow: "0 0 40px rgba(0.0,0,0.5)",
-          padding: 32,
-          boxSizing: "border-box",
-          transition: '1s',
-        }}
-      >
-        <h1>
-          <i
-            onClick={closeDrawer}
-            style={{ padding: "0 5px" }}
-            className="ri-close-circle-fill"
-          ></i>
-          New Student
-        </h1>
-        <form style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 24
-    }}>
-      <input
-        required
-        name="FullName"
-        type="text"
-        placeholder="Enter Your Name"
-        style={{
-          border: '1px solid #ccc',
-          padding: 16,
-          borderRadius: 4,
-        }}
-      />
 
-      <input
-        required
-        name="Class"
-        type="number"
-        placeholder="Enter Your Class"
-        style={{
-          border: '1px solid #ccc',
-          padding: 16,
-          borderRadius: 4,
-        }}
-      />
+      <aside style={{
+        position: 'fixed',
+        top: 0,
+        right: right,
+        width: 450,
+        background: 'white',
+        height: '100%',
+        boxShadow: '0 0 40px rgba(0,0,0,0.2)',
+        padding: 32,
+        boxSizing: 'border-box',
+        transition: '0.3s'
+      }}>
+        <button 
+          onClick={()=>setRight(-450)}
+          style={{
+            border: 'none',
+            background: 'transparent',
+            fontSize: 18,
+            color: '#8407ba',
+            position: 'absolute',
+            top: 20,
+            right: 20
+          }}
+        >
+          <i className="ri-close-circle-line"></i>
+        </button>
+        <h1>New Student</h1>
 
-      <input
-        required
-        name="Sujbect"
-        type="number"
-        placeholder="Enter Your Subject"
-        style={{
-          border: '1px solid #ccc',
-          padding: 16,
-          borderRadius: 4,
-        }}
-      />
+        <form 
+            onSubmit={createStudent}
+            style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 24
+          }}
+          >
+          <input 
+            value={form.fullname}
+            onChange={handleInput}
+            required
+            name="fullname"
+            type="text"
+            placeholder="Enter your fullname here"
+            style={{
+              border: '1px solid #ccc',
+              padding: 16,
+              borderRadius: 4
+            }}
+          />
 
-    <input
-        required
-        name="Dob"
-        type="date"
-    
-        style={{
-          border: '1px solid #ccc',
-          padding: 16,
-          borderRadius: 4,
-        }}
-      />
-      <button style={{
-        border:'none',
-        padding:12,
-        background: "rgb(238,174,202)",
-        background:
-              "radial-gradient(circle, rgba(238,174,202,1) 62%, rgba(148,187,233,1) 100%)",
-        borderRadius: '12px',
-        color: '#000000'
-         }}>
-        Submit
-      </button>
-    </form>
+        <input 
+            value={form.class}
+            onChange={handleInput}
+            required
+            name="class"
+            type="number"
+            placeholder="Enter your class"
+            style={{
+              border: '1px solid #ccc',
+              padding: 16,
+              borderRadius: 4
+            }}
+          />
+
+        <input 
+            value={form.roll}
+            onChange={handleInput}
+            required
+            name="roll"
+            type="number"
+            placeholder="Enter your roll"
+            style={{
+              border: '1px solid #ccc',
+              padding: 16,
+              borderRadius: 4
+            }}
+          />
+
+        <input 
+            value={form.subject}
+            onChange={handleInput}
+            required
+            name="subject"
+            type="text"
+            placeholder="Enter your subject here"
+            style={{
+              border: '1px solid #ccc',
+              padding: 16,
+              borderRadius: 4
+            }}
+          />
+
+          <input 
+            value={form.dob}
+            onChange={handleInput}
+            required
+            name="dob"
+            type="date"
+            style={{
+              border: '1px solid #ccc',
+              padding: 16,
+              borderRadius: 4
+            }}
+          />
+
+          <button style={{
+            border: 'none',
+            background: '#8407BA',
+            color: 'white',
+            fontSize: 16,
+            padding: '14px 0',
+            borderRadius: 4
+          }}>SUBMIT</button>
+        </form>
       </aside>
     </div>
-  );
-};
-export default App;
+  )
+}
+
+export default App
