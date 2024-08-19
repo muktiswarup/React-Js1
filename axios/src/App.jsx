@@ -12,7 +12,7 @@ const fetch=async()=>{
   
   console.log('Something error there',error);
  }
-
+ 
 }
 
   const fetchData=()=>{
@@ -22,7 +22,7 @@ const fetch=async()=>{
     <>
     <h1>  Welcome to the product store</h1>
     <button onClick={fetchData}>Fetch Data</button>
-    <div >
+    <div>
       {product.map((prod,index)=>(<div key={index}><img src={prod.image} alt="Products" width='150'height='150' />Product id:{prod.id} details:{prod.description}price:{prod.price}</div>))}
     </div>
     </>
