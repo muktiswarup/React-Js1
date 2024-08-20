@@ -1,3 +1,4 @@
+import User from "./User";
 /* import React from 'react'
 import { useState } from 'react'
 
@@ -68,7 +69,7 @@ export default App; */
 
 
 
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -85,7 +86,47 @@ function App() {
   );
 }
 
-export default App;
+export default App; */
+
+
+import React from 'react'
+
+const App = () => {
+  return (
+    <div>
+      <User></User>
+    </div>
+  )
+}
+
+export default App
+
+/* import React, { Component } from 'react'
+import  Axios  from 'axios'
+class App extends Component {
+   state = {
+     users:[]
+   } 
+   getUsers = ()=>{
+    Axios.get('https://jsonplaceholder.typicode.com/users')
+        .then((resp)=>{
+          this.setState({users:resp.data})
+        })
+        .catch()
+   }
+  render() {
+    return <div>
+                <h3>Users Component</h3>
+                <pre>{JSON.stringify(this.state.users)}</pre>
+                <button onClick={this.getUsers}>GetUsers</button>
+            </div>
+  }
+}
+
+export default App */
+
+
+
 
 
 
