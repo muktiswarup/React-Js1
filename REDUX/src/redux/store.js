@@ -1,11 +1,4 @@
-/* import {createStore} from "redux"
-import { messageReducer } from "./Messages/message.reducer"
+import { createStore } from "redux"
+import { messageReducer } from "./Message/message.reducer"
 let store=createStore(messageReducer)
-export{store} */
-
-import { createStore } from "redux";
-import { messageReducer } from "./Messages/message.reducer";
-
-let store = createStore(messageReducer);
-
-export { store };
+export {store}
