@@ -1,10 +1,10 @@
 import React from 'react'
-import NavBar from './Component/NavBar'
+import Counter from './component/Counter'
 
 const App = () => {
   return (
     <div>
-        <NavBar/>
+      <Counter/>
     </div>
   )
 }

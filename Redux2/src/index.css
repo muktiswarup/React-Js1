@@ -2,3 +2,13 @@ body{
   background-color: black;
   color: white;
 }
+.Nav_bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: ceenter;
+  background-color: blue;
+  padding: 10px;
+}
+.car{
+  margin-right: 13px;
+}
