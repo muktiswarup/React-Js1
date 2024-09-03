@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 export const cartSlice= createSlice({
-    name:'cart',
-    initialState:{
+    name:'cart',     // create slice make a list called cart
+    initialState:{    // sets the list empty at the begining
         items:[],
         totalPrice:0
     },
-    reducer: {
+    reducers: {        // reducers are like how to change the list
         addtocart :(state,action)=>{
-            newitems=action.payload,
+            const newitems=action.payload;
             state.items.push(newitems),
             state.totalPrice +=newitems.price
         },

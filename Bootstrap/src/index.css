@@ -1,27 +1,6 @@
 body{
-    background-color: rgb(242, 225, 216);
+    background-color: rgb(31, 1, 25);
 }
 /* Ensure that all cards have the same height */
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  /* Centering image and adjusting its size */
-  .product-img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  /* Adjust card header and body to have consistent padding */
-  .card-header,
-  .card-body {
-    padding: 10px;
-  }
-  
-  /* Adjust the grid gap */
-  .g-4 {
-    gap: 1.5rem; /* You can adjust this value to control spacing between cards */
-  }
+
   
