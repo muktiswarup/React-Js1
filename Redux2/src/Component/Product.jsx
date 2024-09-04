@@ -10,9 +10,10 @@ const cartitems=useSelector(selectitems)
 console.log(cartitems)
 const handleAddToCart=(item)=>{
     dispatch(addtocart(item))
+   
 }
   return (
-    <>
+    <>   
        <div className="container my-5">
         <div className="row">
             {
