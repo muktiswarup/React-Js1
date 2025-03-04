@@ -200,7 +200,7 @@ const Product = () => {
 export default Product */
 
 
-
+/* 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 const Product = () => {
@@ -250,6 +250,77 @@ const Product = () => {
         <span  style={{marginLeft:"10px" ,cursor:"pointer"}} onClick={()=>{currentPage(Math.ceil(product.length/10)>page?page+1:page)}}>Next</span>
       </div>
     </div>
+  )
+}
+
+export default Product */
+
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+const Product = () => {
+  const [product,setProduct]=useState([]);
+  const [page,setPage]=useState(1);
+  const fetchData=async()=>{
+    try {
+      const res =await axios.get("https://dummyjson.com/products?limit=100");
+      console.log(res);
+      setProduct(res.data.products);
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  const selectedPage=(p)=>{
+    setPage(p);
+    console.log(p)
+  }
+  let pagelimit =10;
+  let startindex =(page-1)*10;
+  let pageselection=product.slice(startindex,startindex+pagelimit);
+  return (
+    <div>
+      <>Page No {page}</>
+      {
+      
+      pageselection.length >0 ?<>
+      {
+        pageselection.map((item,index)=>(
+          <div key={index}>
+              {item.title}
+          </div>
+        ))
+      }
+      </> : <>No product</>
+
+    }
+
+    <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+      <div>
+        {
+          page>1? <span onClick={()=>{selectedPage(page>1?page-1:1)}} style={{border:"2px solid black",marginLeft:"5px",cursor:"pointer"}} >Previous</span>:<></>
+        }
+          
+          {
+            [...Array(Math.ceil(product.length/10))].map((_,i)=>(
+              <span  onClick={()=>selectedPage(i+1)} style={{border:"2px solid black",marginLeft:"5px",cursor:"pointer"}} key={i}>
+                {i+1}
+              </span>
+            ))
+          }
+
+          {
+            Math.ceil(product.length/10) >page?<span  onClick={()=>{selectedPage(Math.ceil(product.length/10)>page?page+1:page)}} style={{border:"2px solid black",marginLeft:"5px",cursor:"pointer"}}>Next</span>:<></>
+          }
+          
+      </div>
+    </div>
+    
+    </div>
+    
   )
 }
 
