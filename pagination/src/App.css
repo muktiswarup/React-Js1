@@ -30,3 +30,9 @@
 .link:hover {
     color: #f0a500;
 }
+.mode{
+    cursor:pointer;
+    border:none;
+    background:#423030;
+    color:white;
+}

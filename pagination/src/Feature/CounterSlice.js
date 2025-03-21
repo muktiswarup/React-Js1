@@ -1,33 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import { createSlice } from "@reduxjs/toolkit";
 
-// Retrieve the stored counter value or default to 0
-const initialState = {
-    value: localStorage.getItem("counterValue")
-        ? JSON.parse(localStorage.getItem("counterValue"))
-        : 0
-};
+// // Retrieve the stored counter value or default to 0
+// const initialState = {
+//     value: localStorage.getItem("counterValue")
+//         ? JSON.parse(localStorage.getItem("counterValue"))
+//         : 0
+// };
 
-export const counterSlice = createSlice({
-    name: 'Counter',
-    initialState,
-    reducers: {
-        increment: (state) => {
-            state.value += 1;
-            localStorage.setItem("counterValue", JSON.stringify(state.value)); // Save to localStorage
-        },
-        decrement: (state) => {
-            state.value -= 1;
-            localStorage.setItem("counterValue", JSON.stringify(state.value)); // Save to localStorage
-        },
-        incrementByValue: (state, action) => {
-            state.value += action.payload;
-            localStorage.setItem("counterValue", JSON.stringify(state.value)); // Save to localStorage
-        }
-    }
-});
+// export const counterSlice = createSlice({
+//     name: 'Counter',
+//     initialState,
+//     reducers: {
+//         increment: (state) => {
+//             state.value += 1;
+//             localStorage.setItem("counterValue", JSON.stringify(state.value)); // Save to localStorage
+//         },
+//         decrement: (state) => {
+//             state.value -= 1;
+//             localStorage.setItem("counterValue", JSON.stringify(state.value)); // Save to localStorage
+//         },
+//         incrementByValue: (state, action) => {
+//             state.value += action.payload;
+//             localStorage.setItem("counterValue", JSON.stringify(state.value)); // Save to localStorage
+//         }
+//     }
+// });
 
-export const { increment, decrement, incrementByValue } = counterSlice.actions;
-export default counterSlice.reducer;
+// export const { increment, decrement, incrementByValue } = counterSlice.actions;
+// export default counterSlice.reducer;
 
 
 
@@ -62,3 +62,29 @@ Yes! The key name "counterValue" is just an identifier for localStorage. You can
 
 
 */
+
+
+import { createSlice } from "@reduxjs/toolkit";
+
+export const counterSlice= createSlice({
+    name:"counter",
+    initialState:{
+        value:localStorage.getItem('item')?(JSON.parse(localStorage.getItem('item'))):0
+    },
+    reducers:{
+        IncrementValue:(state)=>{
+            state.value=state.value+1;
+            JSON.stringify(localStorage.setItem('item',state.value))
+        },
+        DecrementVlaue:(state)=>{
+            state.value=state.value-1;
+            JSON.stringify(localStorage.setItem('item',state.value))
+        },
+        IncrementByValue:(state,action)=>{
+            state.value=state.value+action.payload;
+             JSON.stringify(localStorage.setItem('item',state.value))
+        }
+    }
+})
+export  const {IncrementValue,DecrementVlaue,IncrementByValue}=counterSlice.actions;
+export default counterSlice.reducer;
